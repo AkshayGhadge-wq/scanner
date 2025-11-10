@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scanner & Agent</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <style>
+      :root { color-scheme: dark; }
+      body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial; background:#0f1220; color:#e6e8ee;}
+      .wrap { max-width: 1100px; margin: 32px auto; padding: 0 16px;}
+      h1 { font-size: 28px; margin: 0 0 16px 0; }
+      .tabs { display:flex; gap:8px; margin-bottom:16px;}
+      .tab { background:#1b2038; border:1px solid #2a3156; color:#cfd3e6; padding:10px 14px; border-radius:10px; cursor:pointer; }
+      .tab.active { background:#2940d3; border-color:#2940d3; color:white; }
+      .tabpane { display:none; }
+      .tabpane.active { display:block; }
+      .card, .output, .card2 { background:#12162b; border:1px solid #242b4e; border-radius:14px; padding:16px; margin-bottom:16px; }
+      .section h2 { margin: 18px 0 8px 0; }
+      label { display:block; font-size:12px; color:#9aa2c7; margin:10px 0 6px 0; }
+      input, select { width:100%; background:#0c1022; border:1px solid #25305b; color:#e6e8ee; padding:10px 12px; border-radius:10px; }
+      button { width:100%; margin-top:12px; background:#2940d3; color:white; padding:12px; border:0; border-radius:12px; cursor:pointer;}
+      button:disabled { opacity:.6; cursor:not-allowed; }
+      .output { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; white-space: pre-wrap; word-break: break-word; }
+      .diagram { border:1px dashed #2b3565; border-radius:12px; padding:12px; min-height:56px; }
+      .file-list code, .code { white-space: pre; display:block; overflow:auto; }
+      .muted { color:#9aa2c7; font-size:12px;}
+      .row { display:flex; gap:12px; }
+      .row > div { flex:1; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Scanner & Agent</h1>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="url">URL Scanner</button>
+        <button class="tab" data-tab="agent">Agent (VM) Scanner</button>
+      </div>
+
+      <!-- URL SCANNER -->
+      <div id="url" class="tabpane active">
+        <div class="card">
+          <label>Scanner API Base URL</label>
+          <input id="api" placeholder="https://<your-tunnel>.trycloudflare.com" />
+          <label>Target URL</label>
+          <input id="urlInput" placeholder="https://example.com" />
+          <button id="scanBtn">Scan</button>
+          <div class="muted">Endpoints used: <code>POST /scan</code></div>
+        </div>
+
+        <div id="output" class="output"></div>
+
+        <div class="row">
+          <div class="card2" style="flex:2">
+            <h2>Provisioning Plan</h2>
+            <div id="planMeta" class="output"></div>
+          </div>
+          <div class="card2" style="flex:3">
+            <h2>Architecture Flow</h2>
+            <div id="diagram" class="diagram"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card2" style="flex:3">
+            <h2>Generated IaC Files</h2>
+            <div id="files" class="file-list output"></div>
+          </div>
+          <div class="card2" style="flex:2">
+            <h2>Commands</h2>
+            <div id="commands" class="output"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENT / VM SCANNER -->
+      <div id="agent" class="tabpane">
+        <div class="card">
+          <label>API Base</label>
+          <input id="api2" placeholder="https://<your-tunnel>.trycloudflare.com" />
+          <label>VM Name</label>
+          <input id="vmname" placeholder="my-linux-vm"/>
+          <label>OS</label>
+          <select id="vmos">
+            <option value="linux">linux</option>
+            <option value="windows">windows</option>
+          </select>
+          <button id="createSrcBtn">Create Source & Get Installer</button>
+          <div class="muted">Endpoint used: <code>POST /sources</code></div>
+        </div>
+
+        <div id="installOut" class="output"></div>
+
+        <div class="card">
+          <label>Source ID</label>
+          <input id="sid" placeholder="src-..." />
+          <button id="scanHostBtn">Scan Now</button>
+          <div class="muted">Flow: <code>POST /scanHost → GET /scanJobs/{id}/status → GET /scanJobs/{id}/results</code></div>
+        </div>
+
+        <div id="jobStatus" class="output"></div>
+
+        <!-- Agent results in same format as URL scan -->
+        <div class="row">
+          <div class="card2" style="flex:2">
+            <h2>Provisioning Plan</h2>
+            <div id="planMeta2" class="output"></div>
+          </div>
+          <div class="card2" style="flex:3">
+            <h2>Architecture Flow</h2>
+            <div id="diagram2" class="diagram"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="card2" style="flex:3">
+            <h2>Generated IaC Files</h2>
+            <div id="files2" class="file-list output"></div>
+          </div>
+          <div class="card2" style="flex:2">
+            <h2>Commands</h2>
+            <div id="commands2" class="output"></div>
+          </div>
+        </div>
+
+        <div class="card2">
+          <h2>Raw Results</h2>
+          <div id="results2" class="output"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+*{ box-sizing: border-box; }
+body{ font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin:0; padding:0; background:#0b0f17; color:#e8eefc; }
+.wrap{ max-width: 1000px; margin: 40px auto; padding: 0 16px; }
+h1{ margin-bottom: 16px; }
+.card{ background:#111827; padding:16px; border-radius:16px; box-shadow: 0 10px 20px rgba(0,0,0,.2); display:grid; gap:10px; }
+.card input, .card select{ padding:10px; border-radius:12px; border:1px solid #303c54; background:#0b1220; color:#e8eefc; }
+.card button{ padding:10px 14px; border-radius:12px; background:#2563eb; color:white; border:none; cursor:pointer; }
+.card button:hover{ opacity:.9; }
+.output{ white-space: pre-wrap; margin-top:16px; background:#0b1220; border:1px solid #303c54; padding:16px; border-radius:16px; }
+.section{ margin-top:24px; }
+h2{ font-size: 22px; margin: 20px 0 8px; }
+.grid{ display:grid; gap:12px; }
+.card2{ background:#0b1220; border:1px solid #303c54; border-radius:14px; padding:14px; }
+.code{ background:#060a12; border:1px dashed #2b3750; padding:12px; border-radius:10px; overflow:auto; }
+.btn{ padding:8px 12px; border-radius:10px; background:#1f2b44; color:#d5e3ff; border:1px solid #31466f; cursor:pointer; }
+.kv{ display:grid; grid-template-columns: 220px 1fr; gap:8px; }
+.kv div{ padding:4px 0; }
+.diagram{ background:#0b1220; border:1px solid #303c54; border-radius:14px; padding:16px; }
+svg text{ fill:#d5e3ff; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+svg .box{ fill:#111827; stroke:#3a4a6d; stroke-width:1.4; rx:10; ry:10; }
+svg .arrow{ stroke:#3a4a6d; stroke-width:1.4; marker-end: url(#arrowhead); fill:none; }
+.file-list{ display:grid; gap:8px; }
+.file-item{ background:#0b1220; border:1px solid #303c54; border-radius:10px; padding:10px; }
+.file-item header{ display:flex; justify-content:space-between; align-items:center; }
+.file-item pre{ max-height:260px; overflow:auto; margin-top:8px; }
+.tabs{ display:flex; gap:8px; margin-bottom:12px; }
+.tab{ background:#0b1220; border:1px solid #303c54; padding:8px 12px; border-radius:10px; cursor:pointer; }
+.tab.active{ background:#1b2640; }
+.tabpane{ display:none; }
+.tabpane.active{ display:block; }
